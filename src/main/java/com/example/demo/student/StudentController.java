@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.StudentInfo;
+
 @RestController
 @RequestMapping(path = "api/v1/student")
 public class StudentController {
@@ -25,8 +27,8 @@ public class StudentController {
   }
 
   @GetMapping
-  public List<Student> getStudents() {
-    return studentService.getStudents();
+  public List<StudentInfo> getStudents() {
+    return studentService.getStudents().stream().map(StudentInfo::new).toList();
   }
 
   @PostMapping
