@@ -22,13 +22,15 @@ public class TeacherService {
   }
 
   public void addNewTeacher(Teacher teacher) {
-    var teacherOptional = teacherRepository.findOptionalByEmail(teacher.getEmail());
+    var teacherOptional = teacherRepository.findOptionalByName(teacher.getName());
 
     if (teacherOptional.isPresent()) {
-      throw new IllegalStateException("email taken");
+      throw new IllegalStateException("name taken");
     }
 
     teacherRepository.save(teacher);
+
+    return;
   }
 
   public void deleteTeacher(Long teacherId) {
@@ -41,16 +43,12 @@ public class TeacherService {
     teacherRepository.deleteById(teacherId);
   }
 
-  public void updateTeacher(Long teacherId, String name, String email) {
+  public void updateTeacher(Long teacherId, String name) {
     Teacher teacher = teacherRepository.findById(teacherId).orElseThrow(() -> new IllegalStateException(
         format("teacher with id %s does not exists", teacherId)));
 
     if (name != null && name.length() > 0 && !Objects.equals(teacher.getName(), name)) {
       teacher.setName(name);
-    }
-
-    if (email != null && email.length() > 0 && !Objects.equals(teacher.getName(), teacher)) {
-      teacher.setEmail(email);
     }
 
     teacherRepository.save(teacher);

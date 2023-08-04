@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.demo.student.Student;
@@ -21,7 +22,6 @@ public class Teacher {
   private Long id;
 
   private String name;
-  private String email;
 
   @ManyToMany(cascade = ALL, mappedBy = "teachers")
   private List<Student> students;
@@ -32,6 +32,7 @@ public class Teacher {
 
   public Teacher(String name) {
     this.name = name;
+    this.students = new ArrayList<Student>();
   }
 
   public String getName() {
@@ -75,16 +76,12 @@ public class Teacher {
         "}";
   }
 
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
   public void setStudents(List<Student> students) {
     this.students = students;
   }
 
+  @Override
+  public boolean equals(Object obj) {
+
+  }  
 }

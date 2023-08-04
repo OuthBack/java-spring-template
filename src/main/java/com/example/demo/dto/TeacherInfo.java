@@ -9,13 +9,11 @@ import com.example.demo.teacher.Teacher;
 public class TeacherInfo {
   private final Long id;
   private final String name;
-  private final String email;
   private final List<StudentInfo> students;
 
   public TeacherInfo(Teacher teacher) {
     this.id = teacher.getId();
     this.name = teacher.getName();
-    this.email = teacher.getEmail();
     this.students = teacher.getStudents().stream().map(StudentInfo::new).toList();
   }
 
@@ -67,9 +65,4 @@ public class TeacherInfo {
   public List<StudentInfo> getStudents() {
     return students;
   }
-
-  public String getEmail() {
-    return email;
-  }
-
 }

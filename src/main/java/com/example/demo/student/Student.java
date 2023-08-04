@@ -31,8 +31,7 @@ public class Student {
   public Student() {
   }
 
-  public Student(
-      Long id,
+  public Student( Long id,
       String name,
       String email,
       LocalDateTime dob) {
@@ -145,7 +144,5 @@ public class Student {
     } else if (!id.equals(other.id))
       return false;
     return true;
-  }
-
-  
+  }  
 }
